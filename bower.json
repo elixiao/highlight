@@ -1,0 +1,29 @@
+{
+  "name": "highlight",
+  "authors": [
+    "elixiao-mac <elixiao@gmail.com>"
+  ],
+  "description": "highlight code so you can copy them to evernote",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "highlight"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "angular": "^1.5.1",
+    "angular-sanitize": "^1.5.1",
+    "ui-select": "angular-ui-select#^0.16.0",
+    "bootstrap": "^3.3.6"
+  }
+}

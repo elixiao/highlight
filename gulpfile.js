@@ -58,7 +58,7 @@ gulp.task('minJs',function() {
 gulp.task('index', function() {
     return gulp.src('src/index.html')
         .pipe(processhtml())
-        //.pipe(minifyHtml())
+        .pipe(minifyHtml())
         .pipe(gulp.dest('.'));
 });
 

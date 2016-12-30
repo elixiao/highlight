@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="图片转base64小工具">
+    <title>base64在线生成</title>
+    <style type="text/css">
+        body {
+            margin: 20px;
+            padding: 20px;
+            font-family: 'Microsoft Yahei';
+            font-size: 18px;
+        }
+
+        .content {
+            width: 100%;
+            display: flex;
+        }
+
+        .top_tip {
+            font-size: 28px;
+            margin-top: 30px;
+        }
+
+        #btn {
+            width: 300px;
+            height: 250px;
+            border: dashed 2px rgba(226, 89, 247, 0.87);
+            margin: 20px 0px;
+            background-color: rgba(174, 255, 187, 0.64);
+            text-align: center;
+            padding-top: 100px;
+            box-sizing: border-box;
+        }
+
+        #result {
+            width: 400px;
+            height: 250px;
+            resize: none;
+            border-radius: 5px;
+            box-shadow: 0 0 11px #15A8FA;
+            border: solid 1px #15A8FA;
+            margin-top: 15px;
+        }
+
+        .allow_drop {
+            border: solid 1px green !important;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div style="flex:1">
+        <div class="top_tip">base64生成工具</div>
+        <div id="btn">拖拽文件到这里或者点击浏览文件生成base64</div>
+    </div>
+    <div style="flex:1">
+        <div class="top_tip"> base64结果(请按下Ctrl+C复制)</div>
+        <textarea id="result"></textarea>
+        <input type="file" id="hide_file" style="display:none;"/>
+    </div>
+    <div style="flex: 1;text-align: center;">
+        <div class="top_tip">图片</div>
+        <div style="margin-top: 20px">
+            <img id="img" style="max-width: 300px;max-height: 250px" src="">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var btn = document.getElementById('btn');
+    var hide_file = document.getElementById('hide_file');
+    var result = document.getElementById('result');
+    btn.addEventListener('click', function () {
+        hide_file.click();
+    });
+    hide_file.addEventListener('change', function (e) {
+        console.log(e);
+        readFiles(this.files);
+    });
+    //MIME type类型映射
+    var MIME = {
+        ttf: 'font/truetype',
+        woff: 'font/woff'
+    }
+    function readFiles(files) {
+        console.log(files);
+        if (files.length <= 0) return;//这里只处理第一个文件
+        var file = files[0];
+        var type = file.type;
+        if (!type)//未知格式时type会为空
+        {
+            var suffix = file.name.substring(file.name.lastIndexOf('.') + 1);
+            type = MIME[suffix];
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            var base64 = this.result;
+            base64 = base64.replace(/data:.*?;/g, 'data:' + type + ';');
+            result.value = base64;
+            result.select();
+            result.focus();
+            document.getElementById('img').src = base64;
+        }
+    }
+
+    btn.addEventListener('dragover', function (e) {
+        e.preventDefault();
+    });
+    btn.addEventListener('dragenter', function (e) {
+        btn.className = 'allow_drop';
+    });
+    btn.addEventListener('dragend', function (e) {
+        btn.className = '';
+    });
+    btn.addEventListener('dragleave', function (e) {
+        btn.className = '';
+    });
+    btn.addEventListener('drop', function (e) {
+        btn.className = '';
+        e.preventDefault();
+        console.log(e);
+        readFiles(e.dataTransfer.files);
+    });
+
+</script>
+</body>
+</html>

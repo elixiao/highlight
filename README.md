@@ -12,3 +12,26 @@ Evernote没有代码模块，但有时候又想把一些代码片段保存到Eve
 
 网址：www.janedan.cn/keycode
 
+## 查看本机ip地址
+
+查看自己电脑的外网IP，在支持webRTC的浏览器上还能看到内网IP。
+
+网址：www.janedan.cn/ip
+
+## 汉字转拼音
+
+输入任意汉字，可以转换为拼音。
+
+网址：www.janedan.cn/pinyin
+
+## 图片转base64编码
+
+把小图片转换为base64格式，方便嵌入到CSS里面。
+
+网址：www.janedan.cn/base64
+
+## Unicode转码与解码
+
+文本转Unicode，Unicode转文本。
+
+网址：www.janedan.cn/unicode

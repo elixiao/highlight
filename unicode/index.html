@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>unicode</title>
+    <STYLE TYPE="text/css">
+        body {
+            text-align: center;
+        }
+        textarea {
+            width: 500px;
+            height: 300px;
+            box-sizing: border-box;
+            border:1px solid gray;
+        }
+        #btn-container {
+            width: 100px;
+            display: inline-block;
+        }
+    </STYLE>
+    <script >
+        // 二进制（Binary） 十进制（Decimal） 十六进制（Hexadecimal）
+        function native2unicode() {
+            document.getElementById('unicode').value=dec2hex(document.getElementById('native').value);
+        }
+        function dec2Hex(str) {
+            var res=[];
+            for(var i=0;i < str.length;i++) res[i]=("00"+str.charCodeAt(i).toString(16)).slice(-4);
+            return "\\u"+res.join("\\u");
+        }
+
+        function unicode2native() {
+            document.getElementById('native').value=hex2Dec(document.getElementById('unicode').value);
+        }
+
+        function hex2Dec(str) {
+            str=str.replace(/\\/g,"%");
+            return unescape(str);
+        }
+    </script>
+</head>
+<body>
+<H1>Unicode编码转换工具</H1>
+<br>
+
+<textarea id="native" placeholder="请输入文本" style="" rows="5" cols="50" ></textarea>
+<div id="btn-container">
+    <input onclick="native2unicode()" type="button" value="编码=>"><br/>
+    <input onclick="unicode2native()" type="button" value="<=解码">
+</div>
+<textarea id="unicode" placeholder="请输入unicode编码" rows="5" cols="50" ></textarea>
+
+</body>
+</html>

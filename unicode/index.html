@@ -23,17 +23,17 @@
         function native2unicode() {
             document.getElementById('unicode').value=dec2hex(document.getElementById('native').value);
         }
-        function dec2Hex(str) {
+        function dec2hex(str) {
             var res=[];
             for(var i=0;i < str.length;i++) res[i]=("00"+str.charCodeAt(i).toString(16)).slice(-4);
             return "\\u"+res.join("\\u");
         }
 
         function unicode2native() {
-            document.getElementById('native').value=hex2Dec(document.getElementById('unicode').value);
+            document.getElementById('native').value=hex2dec(document.getElementById('unicode').value);
         }
 
-        function hex2Dec(str) {
+        function hex2dec(str) {
             str=str.replace(/\\/g,"%");
             return unescape(str);
         }
